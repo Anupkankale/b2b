@@ -1,50 +1,40 @@
-<h1 align="center"><b>B2B Visitor Intelligence Plugin</b></h1>
-===================================================
+╔════════════════════════════════════════════════════════════════╗
+║         B2B Visitor Intelligence Plugin for WordPress          ║
+╚════════════════════════════════════════════════════════════════╝
 
-Privacy-First Company Identification & Visitor Analytics for WordPress
+Privacy-First Company Identification & Visitor Analytics
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Track which companies visit your website, what they view, and how often they return — while keeping 100% of your data inside your own WordPress database.
+Track which companies visit your website, what they view, and how 
+often they return — while keeping 100% of your data inside your 
+own WordPress database.
 
-📌 Overview
 
-The B2B Visitor Intelligence Plugin is an internal-use WordPress plugin designed for companies that want:
+─ OVERVIEW ─────────────────────────────────────────────────────
 
-Company-level visitor identification
+The B2B Visitor Intelligence Plugin is an internal-use WordPress 
+plugin designed for companies that want:
 
-Page visit tracking by organization
-
-Geographic insights (city/region)
-
-Lead engagement signals
-
-Real-time visitor monitoring
-
-Full control of data (no third-party storage)
+    ✓ Company-level visitor identification
+    ✓ Page visit tracking by organization
+    ✓ Geographic insights (city/region)
+    ✓ Lead engagement signals
+    ✓ Real-time visitor monitoring
+    ✓ Full control of data (no third-party storage)
 
 This plugin is built for in-house deployment, not public distribution.
 
-🚀 Features
 
-🔎 Reverse IP lookup to identify visiting companies
+─ KEY FEATURES ─────────────────────────────────────────────────
 
-🌍 City and region-level geographic detection
+    🔎 Reverse IP lookup to identify visiting companies
+    🌍 City and region-level geographic detection
+    📄 Track pages viewed per company
+    🔁 Detect returning visitors
+    📊 Calculate bounce rate, session depth, and visit frequency
+    🔥 Email alerts for hot/repeated visitors
+    🗄️  All data stored locally in WordPress database
+    🟢 Real-time visitor counter in WP Admin dashboard
+    🔐 Privacy-first architecture (no external tracking storage)
 
-📄 Tracks pages viewed per company
-
-🔁 Detects returning visitors
-
-📊 Calculates:
-
-Bounce rate per company
-
-Session depth
-
-Visit frequency
-
-🔥 Sends email alerts for hot/repeated visitors
-
-🗄 Stores all data locally in WordPress database
-
-🟢 Real-time visitor counter in WP Admin dashboard
-
-🔐 Privacy-first architecture (no external tracking storage)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
