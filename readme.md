@@ -1,14 +1,12 @@
-╔════════════════════════════════════════════════════════════════╗
-║         B2B Visitor Intelligence Plugin for WordPress          ║
-╚════════════════════════════════════════════════════════════════╝
-
-Privacy-First Company Identification & Visitor Analytics
+ # B2B Visitor Intelligence Plugin for WordPress      
+ Privacy-First Company Identification & Visitor Analytics
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ <img width="1610" height="746" alt="image" src="https://github.com/user-attachments/assets/8b831762-1182-4552-b57a-e44a92733238" />
 
 Track which companies visit your website, what they view, and how 
 often they return — while keeping 100% of your data inside your 
 own WordPress database.
-
 
 ─ OVERVIEW ─────────────────────────────────────────────────────
 
