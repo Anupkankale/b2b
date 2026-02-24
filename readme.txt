@@ -2,6 +2,8 @@
 ║         B2B Visitor Intelligence Plugin for WordPress          ║
 ╚════════════════════════════════════════════════════════════════╝
 
+
+
 Privacy-First Company Identification & Visitor Analytics
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
