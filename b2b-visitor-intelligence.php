@@ -1,11 +1,11 @@
  <?php
 /**
  * Plugin Name: B2B Visitor Intelligence
- * Plugin URI:  https://yourwebsite.com
- * Description: Identifies visiting companies, tracks their journey, and sends hot lead alerts — all stored privately in your own WordPress database.
- * Version:     2.0.0
+ * Plugin URI:  https://github.com/Anupkankale/b2b.git
+ * Description: Identifies visiting companies, tracks their journey, and sends hot lead alerts all stored privately in your own WordPress database.
+ * Version:     0.0.1
  * Author:      Anup 
- * License:     GPL-2.0+
+ * License:     GPLv2 
  * Text Domain: b2b-visitor-intelligence
  */
 

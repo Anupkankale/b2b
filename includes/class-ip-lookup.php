@@ -1,6 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * IP Lookup class  */
 class BVIP_IP_Lookup {
 
 	public function get_company_data( $ip ) {
@@ -56,6 +58,7 @@ class BVIP_IP_Lookup {
 	public function is_valid_ip( $ip ) {
 		if ( empty( $ip ) ) return false;
 		if ( ! filter_var( $ip, FILTER_VALIDATE_IP ) ) return false;
+		
 		// Exclude private ranges
 		$private = array( '10.', '192.168.', '172.16.', '172.17.', '172.18.',
 			'172.19.', '172.20.', '127.', '::1', 'localhost' );
