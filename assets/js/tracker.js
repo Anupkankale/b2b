@@ -26,6 +26,7 @@
 			if (d && d.visit_id) {
 				visitId     = d.visit_id;
 				sessionHash = d.session_hash;
+				window._bvipSessionHash = sessionHash;
 			}
 		})
 		.catch(function () {});
@@ -35,9 +36,10 @@
 	function reportDuration() {
 		if (!visitId || !sessionHash) return;
 		var seconds = Math.round((Date.now() - pageStart) / 1000);
+		var payload = JSON.stringify({ visit_id: visitId, session_hash: sessionHash, time_on_page: seconds });
 		navigator.sendBeacon(
 			restBase + 'duration',
-			JSON.stringify({ visit_id: visitId, session_hash: sessionHash, time_on_page: seconds })
+			new Blob([payload], { type: 'application/json' })
 		);
 	}
 
@@ -47,11 +49,4 @@
 	});
 	window.addEventListener('pagehide', reportDuration);
 
-}());
-// Expose session hash for click-tracker.js
-(function waitForSession() {
-	var check = setInterval(function () {
-		if (sessionHash) { window._bvipSessionHash = sessionHash; clearInterval(check); }
-	}, 50);
-	setTimeout(function () { clearInterval(check); }, 5000);
 }());

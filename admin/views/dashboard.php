@@ -77,7 +77,7 @@ function bvip_fmt_time( $s ) {
 	<div class="bvip-section">
 		<div class="bvip-section-header">
 			<h2>🔥 Company Visitors</h2>
-			<span class="bvip-badge"><?php echo count($companies); ?> identified</span>
+			<span class="bvip-badge"><?php echo esc_html( count( $companies ) ); ?> identified</span>
 		</div>
 		<?php if ( empty($companies) ) : ?>
 			<div class="bvip-empty">

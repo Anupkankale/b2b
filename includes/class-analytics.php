@@ -187,6 +187,10 @@ class BVIP_Analytics {
 
 	public function flush_cache() {
 		global $wpdb;
-		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_bvip_%' OR option_name LIKE '_transient_timeout_bvip_%'" );
+		$wpdb->query( $wpdb->prepare(
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+			$wpdb->esc_like( '_transient_bvip_' ) . '%',
+			$wpdb->esc_like( '_transient_timeout_bvip_' ) . '%'
+		) );
 	}
 }

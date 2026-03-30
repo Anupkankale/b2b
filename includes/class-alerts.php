@@ -54,8 +54,8 @@ class BVIP_Alerts {
 				$date_from
 			) );
 
-			$this->send_alert_email( $alert_email, $lead, $pages );
 			set_transient( $transient_key, true, DAY_IN_SECONDS );
+			$this->send_alert_email( $alert_email, $lead, $pages );
 		}
 	}
 

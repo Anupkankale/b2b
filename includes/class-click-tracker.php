@@ -29,7 +29,7 @@ class BVIP_Click_Tracker {
 			'restUrl' => esc_url_raw( rest_url() ),
 			'nonce'   => wp_create_nonce( 'wp_rest' ),
 			'postId'  => get_queried_object_id(),
-			'pageUrl' => esc_url( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ),
+			'pageUrl' => esc_url( home_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/' ) ) ) ),
 		) );
 	}
 

@@ -78,7 +78,7 @@
 		getSessionHash(function (hash) {
 			payload.session_hash = hash;
 			try {
-				navigator.sendBeacon(restUrl, JSON.stringify(payload));
+				navigator.sendBeacon(restUrl, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
 			} catch (err) {
 				fetch(restUrl, {
 					method: 'POST',

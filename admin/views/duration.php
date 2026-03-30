@@ -29,7 +29,7 @@ function bvip_fmt_time_dur( $s ) {
 			</thead>
 			<tbody>
 				<?php
-				$max_avg = max( array_column( (array) $durations, 'avg_seconds' ) );
+				$max_avg = ! empty( $durations ) ? max( array_column( (array) $durations, 'avg_seconds' ) ) : 0;
 				foreach ( $durations as $d ) :
 					$pct = $max_avg > 0 ? round( ($d->avg_seconds / $max_avg) * 100 ) : 0;
 					if ( $d->avg_seconds >= 120 )      $engagement = '🟢 High';

@@ -77,6 +77,7 @@ class BVIP_Tracker {
 			),
 			array( '%d','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s' )
 		);
+		$visit_id = (int) $wpdb->insert_id;
 
 		// Update session
 		$existing = $wpdb->get_row( $wpdb->prepare(
@@ -110,7 +111,11 @@ class BVIP_Tracker {
 			);
 		}
 
-		return new WP_REST_Response( array( 'status' => 'ok' ), 200 );
+		return new WP_REST_Response( array(
+			'status'       => 'ok',
+			'visit_id'     => $visit_id,
+			'session_hash' => $session_hash,
+		), 200 );
 	}
 
 	private function get_visitor_ip() {

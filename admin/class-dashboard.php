@@ -81,11 +81,17 @@ class BVIP_Dashboard {
 
 	public function ajax_realtime() {
 		check_ajax_referer( 'bvip_nonce', 'nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 		$a = new BVIP_Analytics();
 		wp_send_json_success( array( 'count' => $a->get_realtime_visitors() ) );
 	}
 	public function ajax_flush_cache() {
 		check_ajax_referer( 'bvip_nonce', 'nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 		( new BVIP_Analytics() )->flush_cache();
 		wp_send_json_success( array( 'message' => 'Cache cleared' ) );
 	}
