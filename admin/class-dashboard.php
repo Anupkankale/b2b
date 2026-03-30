@@ -47,9 +47,41 @@ class BVIP_Dashboard {
 	}
 
 	public function register_settings() {
-		foreach ( array('bvip_ipinfo_key','bvip_alert_email','bvip_alert_threshold','bvip_data_retention') as $opt ) {
-			register_setting( 'bvip_settings', $opt );
-		}
+		register_setting( 'bvip_settings', 'bvip_ipinfo_key', array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_text_field',
+			'default'           => '',
+		) );
+		register_setting( 'bvip_settings', 'bvip_alert_email', array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_email',
+			'default'           => get_option( 'admin_email' ),
+		) );
+		register_setting( 'bvip_settings', 'bvip_alert_threshold', array(
+			'type'              => 'integer',
+			'sanitize_callback' => static function ( $v ) {
+				return max( 1, min( 50, absint( $v ) ) );
+			},
+			'default'           => 3,
+		) );
+		register_setting( 'bvip_settings', 'bvip_data_retention', array(
+			'type'              => 'integer',
+			'sanitize_callback' => static function ( $v ) {
+				return in_array( (int) $v, array( 90, 180, 365, 0 ), true ) ? (int) $v : 365;
+			},
+			'default'           => 365,
+		) );
+		register_setting( 'bvip_settings', 'bvip_excluded_ips', array(
+			'type'              => 'string',
+			'sanitize_callback' => static function ( $v ) {
+				$lines = array_filter( array_map( 'trim', explode( "\n", (string) $v ) ) );
+				$valid = array_filter( $lines, static function ( $ip ) {
+					return (bool) filter_var( $ip, FILTER_VALIDATE_IP );
+				} );
+				return implode( "\n", $valid );
+			},
+			'default'           => '',
+		) );
 	}
 
 	public function render_dashboard() {

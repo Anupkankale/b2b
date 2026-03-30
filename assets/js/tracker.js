@@ -1,4 +1,4 @@
- (function () {
+(function () {
 	'use strict';
 	if (typeof bvipData === 'undefined') return;
 
@@ -8,8 +8,24 @@
 	var restBase    = bvipData.restUrl + 'b2b-analytics/v1/';
 	var nonce       = bvipData.nonce;
 
+	function getUTMParams() {
+		var result = { utm_source: '', utm_medium: '', utm_campaign: '' };
+		var search = window.location.search.substring(1);
+		if ( ! search ) return result;
+		search.split('&').forEach(function (pair) {
+			var idx = pair.indexOf('=');
+			if (idx < 1) return;
+			var key = decodeURIComponent(pair.substring(0, idx));
+			if (key in result) {
+				result[key] = decodeURIComponent(pair.substring(idx + 1));
+			}
+		});
+		return result;
+	}
+
 	// ── 1. Register Page Visit ─────────────────────────────────────────────
 	window.addEventListener('load', function () {
+		var utm = getUTMParams();
 		fetch(restBase + 'track', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce },
@@ -18,7 +34,10 @@
 				referrer:     document.referrer || '',
 				screen_width: window.innerWidth || 0,
 				page_url:     bvipData.pageUrl || window.location.href,
-				page_title:   bvipData.pageTitle || document.title,
+				page_title:   document.title,
+				utm_source:   utm.utm_source,
+				utm_medium:   utm.utm_medium,
+				utm_campaign: utm.utm_campaign,
 			}),
 		})
 		.then(function (r) { return r.json(); })

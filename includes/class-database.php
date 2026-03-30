@@ -25,6 +25,9 @@ class BVIP_Database {
 			device_type      varchar(20)   NOT NULL DEFAULT 'desktop',
 			page_url         varchar(500)           DEFAULT NULL,
 			page_title       varchar(300)           DEFAULT NULL,
+			utm_source       varchar(100)           DEFAULT NULL,
+			utm_medium       varchar(100)           DEFAULT NULL,
+			utm_campaign     varchar(100)           DEFAULT NULL,
 			time_on_page     int(11)       NOT NULL DEFAULT 0,
 			visited_at       datetime      NOT NULL,
 			PRIMARY KEY  (id),
@@ -32,7 +35,8 @@ class BVIP_Database {
 			KEY visited_at   (visited_at),
 			KEY post_id      (post_id),
 			KEY country_code (country_code),
-			KEY session_hash (session_hash)
+			KEY session_hash (session_hash),
+			KEY utm_source   (utm_source(50))
 		) $charset;";
 
 		$sessions = "CREATE TABLE {$wpdb->prefix}bvip_sessions (
@@ -75,5 +79,15 @@ class BVIP_Database {
 		dbDelta( $clicks );
 
 		update_option( 'bvip_db_version', BVIP_VERSION );
+	}
+
+	/**
+	 * Run on every plugin load — only calls create_tables() when the stored
+	 * DB version doesn't match the current plugin version.
+	 */
+	public static function maybe_upgrade() {
+		if ( get_option( 'bvip_db_version' ) !== BVIP_VERSION ) {
+			self::create_tables();
+		}
 	}
 }

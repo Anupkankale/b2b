@@ -5,6 +5,27 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * IP Lookup class  */
 class BVIP_IP_Lookup {
 
+	/** Country code → full name map (ISO 3166-1 alpha-2). */
+	private static $country_names = array(
+		'AF'=>'Afghanistan','AL'=>'Albania','DZ'=>'Algeria','AR'=>'Argentina','AU'=>'Australia',
+		'AT'=>'Austria','BE'=>'Belgium','BR'=>'Brazil','CA'=>'Canada','CL'=>'Chile',
+		'CN'=>'China','CO'=>'Colombia','HR'=>'Croatia','CZ'=>'Czech Republic','DK'=>'Denmark',
+		'EG'=>'Egypt','FI'=>'Finland','FR'=>'France','DE'=>'Germany','GH'=>'Ghana',
+		'GR'=>'Greece','HK'=>'Hong Kong','HU'=>'Hungary','IN'=>'India','ID'=>'Indonesia',
+		'IE'=>'Ireland','IL'=>'Israel','IT'=>'Italy','JP'=>'Japan','KE'=>'Kenya',
+		'MY'=>'Malaysia','MX'=>'Mexico','MA'=>'Morocco','NL'=>'Netherlands','NZ'=>'New Zealand',
+		'NG'=>'Nigeria','NO'=>'Norway','PK'=>'Pakistan','PE'=>'Peru','PH'=>'Philippines',
+		'PL'=>'Poland','PT'=>'Portugal','RO'=>'Romania','RU'=>'Russia','SA'=>'Saudi Arabia',
+		'ZA'=>'South Africa','KR'=>'South Korea','ES'=>'Spain','SE'=>'Sweden','CH'=>'Switzerland',
+		'TW'=>'Taiwan','TH'=>'Thailand','TR'=>'Turkey','UA'=>'Ukraine','AE'=>'United Arab Emirates',
+		'GB'=>'United Kingdom','US'=>'United States','VN'=>'Vietnam',
+	);
+
+	/** Returns true if the IP result is already in the transient cache. */
+	public function is_cached( $ip ) {
+		return false !== get_transient( 'bvip_ip_' . md5( $ip ) );
+	}
+
 	public function get_company_data( $ip ) {
 		if ( ! $this->is_valid_ip( $ip ) ) {
 			return array();
@@ -36,14 +57,16 @@ class BVIP_IP_Lookup {
 		}
 
 		$loc  = isset( $data['loc'] ) ? explode( ',', $data['loc'] ) : array( '', '' );
+		$country_code = isset( $data['country'] ) ? $data['country'] : '';
 		$result = array(
-			'company' => $this->strip_as_number( isset( $data['org'] ) ? $data['org'] : '' ),
-			'domain'  => isset( $data['hostname'] ) ? $data['hostname'] : '',
-			'city'    => isset( $data['city'] )    ? $data['city']    : '',
-			'region'  => isset( $data['region'] )  ? $data['region']  : '',
-			'country' => isset( $data['country'] ) ? $data['country'] : '',
-			'lat'     => isset( $loc[0] )           ? $loc[0]          : '',
-			'lng'     => isset( $loc[1] )           ? $loc[1]          : '',
+			'company'      => $this->strip_as_number( isset( $data['org'] ) ? $data['org'] : '' ),
+			'domain'       => isset( $data['hostname'] ) ? $data['hostname'] : '',
+			'city'         => isset( $data['city'] )    ? $data['city']    : '',
+			'region'       => isset( $data['region'] )  ? $data['region']  : '',
+			'country'      => $country_code,
+			'country_name' => isset( self::$country_names[ $country_code ] ) ? self::$country_names[ $country_code ] : $country_code,
+			'lat'          => isset( $loc[0] ) ? $loc[0] : '',
+			'lng'          => isset( $loc[1] ) ? $loc[1] : '',
 		);
 
 		set_transient( $cache_key, $result, DAY_IN_SECONDS );
