@@ -51,6 +51,22 @@
 			</table>
 		</div>
 
+		<!-- Excluded IPs -->
+		<div class="bvip-settings-section">
+			<h2>🚫 Excluded IPs</h2>
+			<table class="form-table">
+				<tr>
+					<th><label for="bvip_excluded_ips">Exclude These IPs</label></th>
+					<td>
+						<textarea id="bvip_excluded_ips" name="bvip_excluded_ips"
+							rows="4" class="regular-text" placeholder="203.0.113.10&#10;203.0.113.11"
+						><?php echo esc_textarea( get_option( 'bvip_excluded_ips', '' ) ); ?></textarea>
+						<p class="description">One IP address per line. Add your office IP so your own visits don't pollute the data. Invalid IPs are silently dropped on save.</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+
 		<!-- Data Management -->
 		<div class="bvip-settings-section">
 			<h2>🗄️ Data Management</h2>

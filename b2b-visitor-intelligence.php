@@ -29,7 +29,7 @@ if ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-define( 'BVIP_VERSION',     '1.0.0' );
+define( 'BVIP_VERSION',     '1.1.0' );
 define( 'BVIP_PLUGIN_FILE', __FILE__ );
 define( 'BVIP_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'BVIP_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
@@ -56,6 +56,11 @@ register_deactivation_hook( BVIP_PLUGIN_FILE, array( 'BVIP_Deactivator', 'deacti
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
 function bvip_init() {
+	load_plugin_textdomain( 'b2b-visitor-intelligence', false, dirname( plugin_basename( BVIP_PLUGIN_FILE ) ) . '/languages' );
+
+	// Run DB migrations when version changes.
+	BVIP_Database::maybe_upgrade();
+
 	( new BVIP_Tracker() )->init();
 	( new BVIP_Click_Tracker() )->init();
 	( new BVIP_Session_Tracker() )->init();
