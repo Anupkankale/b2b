@@ -1,5 +1,6 @@
 # Hooks Reference
 
+
 All actions and filters exposed by B2B Visitor Intelligence.
 
 ---
